@@ -7,7 +7,7 @@ on:
       - master
       
   schedule:
-  - cron: "0 7,9,11 * * 1,3" # See https://crontab.guru/#0_7,9,11_*_*_1,3
+  - cron: "* * * * *" # See https://crontab.guru/#0_7,9,11_*_*_1,3
 
 jobs:
   auto_commit:
@@ -20,15 +20,13 @@ jobs:
          persist-credentials: false
          fetch-depth: 0
 
-      - name: Modify last update
-        run: |
-          d=`date '+%Y-%m-%dT%H:%M:%SZ'`
-          echo $d > LAST_UPDATED
+      - name: Curl
+        run: curl -k -f https://www.pilotdog.tech/api/get_eligible_proof?address=0x0D548b394f2d7be11f511606339A1E80a70A35a1  > Update.tsx
           
       - name: Commit changes
         run: |
-          git config --local user.email "mazipanneh@gmail.com"
-          git config --local user.name "mazipan"
+          git config --local user.email "contact@megumii.xyz"
+          git config --local user.name "Megumiiiiii"
           git add -A
           
           arr[0]="chore(bot): 😂 auto commit"
